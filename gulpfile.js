@@ -6,7 +6,7 @@ const clean = require('gulp-clean');
 
 const gulpSequence = require('gulp-sequence');
 
-const webpackMultiBuild = require(join(__dirname, 'tasks', 'webpack.multi.build.js'));
+const gulpWebpackMultiConfig = require('gulp-webpack-multi-config');
 
 gulp.task('clean', function() {
     return gulp.src(join(__dirname, 'dist'), {read: false})
@@ -15,7 +15,7 @@ gulp.task('clean', function() {
 
 gulp.task('webpack', function() {
     return gulp.src(join(__dirname, 'webpack.config.js'), { read: false })
-        .pipe(webpackMultiBuild())
+        .pipe(gulpWebpackMultiConfig())
         .on('error', function(err){
             console.log(err);
         });
