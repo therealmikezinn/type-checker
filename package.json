@@ -1,0 +1,8 @@
+{
+  "name": "type-checker",
+  "version": "1.0.0",
+  "description": "Accurate Type Javascript Type Checking",
+  "main": "index.js",
+  "author": "Michael Zinn",
+  "license": "MIT"
+}
