@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 var config = {};
 
+const { join } = require('path');
+
 function generateConfig(name) {
     var uglify = name.indexOf('min') > -1;
     var config = {
@@ -15,7 +17,18 @@ function generateConfig(name) {
         node: {
             process: false
         },
-        devtool: 'source-map'
+        devtool: 'source-map',
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    exclude: /(node_modules|bower_components)/,
+                    include: join(__dirname, 'index.js'),
+
+                }
+            ]
+        }
     };
 
     config.plugins = [

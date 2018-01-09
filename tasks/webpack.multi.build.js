@@ -10,29 +10,34 @@ module.exports = function(){
     return through2.obj(function (file, enc, cb) {
         const self = this;
 
-        const webPackConfig = require(file.path);
+        let webpackConfig = require(file.path);
 
-        const keys = Object.keys(webPackConfig);
+        if (!Array.isArray(webpackConfig)) {
+            webpackConfig = Object.keys(webpackConfig).map((configKey) => {
+                return webpackConfig[configKey];
+            });
+        }
 
-        async.eachSeries(keys, function(key, callback) {
-            const config = webPackConfig[key];
-
+        function process(config, callback) {
             webpack(config, (err, stats) => {
-                if(err){
+                if (err) {
                     return callback(err);
                 }
 
                 return callback();
             });
-        }, function(err) {
-            // if any of the file processing produced an error, err would equal that error
-            if(err) {
+        }
+
+        function handleError(err) {
+            if (err) {
                 // One of the iterations produced an error.
                 // All processing will now stop.
                 self.emit('error', new gutil.PluginError('webpack-multi-build', 'error'));
             } else {
                 console.log('All files have been processed successfully');
             }
-        });
+        }
+
+        async.eachSeries(webpackConfig, process, handleError);
     });
 };

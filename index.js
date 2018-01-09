@@ -1,4 +1,4 @@
-var types = [
+const types = [
     'Array',
     'Object',
     'Number',
@@ -8,24 +8,24 @@ var types = [
     'Function',
     'Boolean',
     'Null',
-    'Undefined'
+    'Undefined',
 ];
 
-var methods = {
-    isFloat: function(n){
+const methods = {
+    isFloat(n) {
         return (this.isNumber(n) && (parseInt(n) !== n));
     },
-    isInt: function(n){
+    isInt(n) {
         return (this.isNumber(n) && (parseInt(n) === n));
-    }
+    },
 };
 
-var checkType = function(type){
+const checkType = (type) => {
     return Object.prototype.toString.call(type).slice(8, -1);
 };
 
-for(var i = 0, len = types.length; i < len; i++){
-    var type = types[i];
+for(let i = 0, len = types.length; i < len; i++){
+    const type = types[i];
 
     methods['is' + type] = (function(currentType){
         return function(typeToCheck){

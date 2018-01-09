@@ -13,15 +13,15 @@ gulp.task('clean', function() {
             .pipe(clean());
 });
 
-gulp.task('webpack', function(){
-    return gulp.src(join(__dirname, 'webpack.config.js'), {read: false})
+gulp.task('webpack', function() {
+    return gulp.src(join(__dirname, 'webpack.config.js'), { read: false })
         .pipe(webpackMultiBuild())
         .on('error', function(err){
             console.log(err);
         });
 });
 
-gulp.task('build', function(){
+gulp.task('build', function() {
     gulpSequence('clean', 'webpack')(function (err) {
         if (err){
           console.log(err);
