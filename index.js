@@ -1,15 +1,41 @@
 const types = [
     'Array',
-    'Object',
-    'Number',
-    'String',
-    'Date',
-    'RegExp',
-    'Function',
+    'ArrayBuffer',
+    'Arguments',
     'Boolean',
+    'Date',
+    'Error',
+    'Float32Array',
+    'Float64Array',
+    'Function',
+    'GeneratorFunction',
+    'Int8Array',
+    'Int16Array',
+    'Int32Array',
+    'JSON',
+    'Map',
+    'Math',
     'Null',
+    'Number',
+    'Object',
+    'process',
+    'Promise',
+    'RegExp',
+    'Set',
+    'String',
+    'Symbol',
+    'Uint8Array',
+    'Uint8ClampedArray',
+    'Uint16Array',
+    'Uint32Array',
     'Undefined',
+    'WeakMap',
+    'WeakSet',
 ];
+
+const checkType = (type) => {
+    return Object.prototype.toString.call(type).slice(8, -1);
+};
 
 const methods = {
     isFloat(n) {
@@ -18,10 +44,12 @@ const methods = {
     isInt(n) {
         return (this.isNumber(n) && (parseInt(n) === n));
     },
-};
-
-const checkType = (type) => {
-    return Object.prototype.toString.call(type).slice(8, -1);
+    getType(n){
+        return checkType(n);
+    },
+    isType(n, typeToCompare){
+        return checkType(n).toLowerCase() === checkType(typeToCompare).toLowerCase();
+    },
 };
 
 for(let i = 0, len = types.length; i < len; i++){

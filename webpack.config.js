@@ -1,11 +1,13 @@
-var webpack = require('webpack');
-var config = {};
+const webpack = require('webpack');
+
+const config = {};
 
 const { join } = require('path');
 
 function generateConfig(name) {
-    var uglify = name.indexOf('min') > -1;
-    var config = {
+    const uglify = name.indexOf('min') > -1;
+
+    const config = {
         entry: './index.js',
         output: {
             path: __dirname + '/dist/',
@@ -33,7 +35,7 @@ function generateConfig(name) {
 
     config.plugins = [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
         })
     ];
 
@@ -50,7 +52,7 @@ function generateConfig(name) {
     return config;
 }
 
-['type-checker', 'type-checker.min'].forEach(function (key) {
+['type-checker', 'type-checker.min'].forEach((key) => {
     config[key] = generateConfig(key);
 });
 
