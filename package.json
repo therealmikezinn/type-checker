@@ -1,5 +1,5 @@
 {
-  "name": "es-type-checker",
+  "name": "js-type-checker",
   "version": "1.0.0",
   "description": "Consistent Javascript Type Checking Made Simple",
   "main": "index.js",

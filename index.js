@@ -8,6 +8,7 @@ const types = [
     'Float32Array',
     'Float64Array',
     'Function',
+    'Generator',
     'GeneratorFunction',
     'Int8Array',
     'Int16Array',
@@ -18,7 +19,6 @@ const types = [
     'Null',
     'Number',
     'Object',
-    'process',
     'Promise',
     'RegExp',
     'Set',
@@ -48,7 +48,7 @@ const methods = {
         return checkType(n);
     },
     isType(n, typeToCompare){
-        return checkType(n).toLowerCase() === checkType(typeToCompare).toLowerCase();
+        return checkType(n).toLowerCase() === typeToCompare.toLowerCase();
     },
 };
 
