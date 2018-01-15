@@ -98,3 +98,4 @@ typeChecker.isType('type', 'string');   // returns true
 typeChecker.isType('type', 'STRING');   // returns true
 
 ```
+

@@ -2,9 +2,12 @@
   "name": "js-type-checker",
   "version": "1.0.0",
   "description": "Consistent Javascript Type Checking Made Simple",
-  "main": "index.js",
+  "main": "dist/type-checker.js",
   "author": "Michael Zinn",
   "license": "MIT",
+  "scripts":{
+    "start": "node /dist/type-checker.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/therealmikezinn/type-checker.git"
