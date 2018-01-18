@@ -41,14 +41,68 @@ const methods = {
     getType(n){
         return checkType(n);
     },
-    isFloat(n) {
-        return (this.isNumber(n) && (parseInt(n) !== n));
+    isFloat() {
+        if(arguments.length === 0){
+            return false;
+        }
+
+        if(arguments.length === 1){
+            return (this.isNumber(arguments[0]) && (parseInt(arguments[0]) !== arguments[0]));
+        }
+
+        const args = Array.prototype.slice.call(arguments);
+
+        for(let i = 0, len = args.length; i < len; i++){
+            const current = args[i];
+
+            if(!this.isNumber(current) || (parseInt(current) === current)) {
+                return false;
+            }
+        }
+
+        return true;
     },
-    isInt(n) {
-        return (this.isNumber(n) && (parseInt(n) === n));
+    isInt() {
+        if(arguments.length === 0){
+            return false;
+        }
+
+        if(arguments.length === 1){
+            return (this.isNumber(arguments[0]) && (parseInt(arguments[0]) === arguments[0]));
+        }
+
+        const args = Array.prototype.slice.call(arguments);
+
+        for(let i = 0, len = args.length; i < len; i++){
+            const current = args[i];
+
+            if(!this.isNumber(current) || (parseInt(current) !== current)) {
+                return false;
+            }
+        }
+
+        return true;
     },
-    isNullable(n) {
-        return (this.isNull(n) || this.isUndefined(n));
+    isNully(n) {
+        if(arguments.length === 0){
+            return false;
+        }
+
+        if(arguments.length === 1){
+            return (this.isNull(arguments[0]) || this.isUndefined(arguments[0]));
+        }
+
+        const args = Array.prototype.slice.call(arguments);
+
+        for(let i = 0, len = args.length; i < len; i++){
+            const current = args[i];
+
+            if(!this.isNull(current) || !this.isUndefined(current)) {
+                return false;
+            }
+        }
+
+        return true;
     },
     isType(n, typeToCompare){
         return checkType(n).toLowerCase() === typeToCompare.toLowerCase();
