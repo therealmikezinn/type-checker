@@ -41,6 +41,27 @@ const methods = {
     getType(n){
         return checkType(n);
     },
+    isEmpty(){
+        if (arguments.length === 0) {
+            return false;
+        }
+
+        if (arguments.length === 1) {
+            return (this.isNully(current) || current === '')
+        }
+
+        const args = Array.prototype.slice.call(arguments);
+
+        for(let i = 0, len = args.length; i < len; i++){
+            const current = args[i];
+
+            if(!this.isNully(current) || current !== '') {
+                return false;
+            }
+        }
+
+        return true;
+    },
     isFloat() {
         if(arguments.length === 0){
             return false;
