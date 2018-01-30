@@ -40,11 +40,11 @@ const methods = {
     return checkType(n);
   },
   isEmpty(...args) {
-    if (arguments.length === 0) {
+    if (args.length === 0) {
       return false;
     }
 
-    if (arguments.length === 1) {
+    if (args.length === 1) {
       return (this.isNully(args[0]) || args[0] === '');
     }
 
@@ -63,7 +63,7 @@ const methods = {
       return false;
     }
 
-    if (args.length === 1) {
+    if (arguments.length === 1) {
       return (this.isNumber(args[0]) && (parseInt(args[0], 10) !== args[0]));
     }
 
@@ -101,7 +101,7 @@ const methods = {
       return false;
     }
 
-    if (arguments.length === 1) {
+    if (args.length === 1) {
       return (this.isNull(args[0]) || this.isUndefined(args[0]));
     }
 
@@ -134,7 +134,7 @@ for (let i = 0, len = types.length; i < len; i++) {
       }
 
       for (let j = 0, innerLen = args.length; j < innerLen; j++) {
-        const current = args[i];
+        const current = args[j];
 
         if (currentType !== checkType(current)) {
           return false;
