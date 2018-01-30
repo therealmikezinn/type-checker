@@ -47,7 +47,7 @@ const methods = {
         }
 
         if (arguments.length === 1) {
-            return (this.isNully(current) || current === '')
+            return (this.isNully(arguments[0]) || arguments[0] === '')
         }
 
         const args = Array.prototype.slice.call(arguments);

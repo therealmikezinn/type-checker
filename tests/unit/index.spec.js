@@ -94,6 +94,24 @@ describe('Type Checker', function() {
         });
     });
 
+    describe('isEmpty', function(){
+       it('Should have property isEmpty', function(){
+          expect(typeChecker).to.have.a.property('isEmpty');
+       });
+
+       it('Should Return True For empty string', function(){
+          expect(typeChecker.isEmpty('')).to.equal(true);
+       });
+
+        it('Should Return True For Null', function(){
+            expect(typeChecker.isEmpty(null)).to.equal(true);
+        });
+
+        it('Should Return True For undefined', function(){
+            expect(typeChecker.isEmpty(undefined)).to.equal(true);
+        });
+    });
+
     describe('isError', function(){
         it('Should have property isError', function () {
             expect(typeChecker).to.have.a.property('isError');
