@@ -36,7 +36,7 @@ describe('Type Checker', function() {
             expect(typeChecker.isArrayBuffer(new ArrayBuffer())).to.equal(true);
         });
 
-        it("Should return true for Multiple array buffers", function(){
+        it("Should return true for multiple array buffers", function(){
             expect(typeChecker.isArrayBuffer(new ArrayBuffer(), new ArrayBuffer())).to.equal(true);
         });
 
@@ -95,13 +95,13 @@ describe('Type Checker', function() {
     });
 
     describe('isEmpty', function(){
-       it('Should have property isEmpty', function(){
+        it('Should have property isEmpty', function(){
           expect(typeChecker).to.have.a.property('isEmpty');
-       });
+        });
 
-       it('Should Return True For empty string', function(){
+        it('Should Return True For empty string', function(){
           expect(typeChecker.isEmpty('')).to.equal(true);
-       });
+        });
 
         it('Should Return True For Null', function(){
             expect(typeChecker.isEmpty(null)).to.equal(true);
@@ -122,8 +122,26 @@ describe('Type Checker', function() {
         });
     });
 
+    describe('isFloat', function(){
+        it('Should have property isFloat', function(){
+          expect(typeChecker).to.have.a.property('isFloat');
+        });
+
+        it('Should be true for single float', function(){
+            expect(typeChecker.isFloat(2.7)).to.equal(true);
+        });
+
+        it('Should be true for multiple floats', function(){
+            expect(typeChecker.isFloat(2.7, 2.9)).to.equal(true);
+        });
+
+        it('Should be false for an int', function(){
+            expect(typeChecker.isFloat(2)).to.equal(false);
+        });
+    });
+
     describe('isFloat32Array', function(){
-        it('Should have property isFloat32Array', function () {
+        it('Should have property isFloat32Array', function() {
             expect(typeChecker).to.have.a.property('isFloat32Array');
         });
 
@@ -133,7 +151,7 @@ describe('Type Checker', function() {
     });
 
     describe('isFloat64Array', function(){
-        it('Should have property isFloat64Array', function () {
+        it('Should have property isFloat64Array', function() {
             expect(typeChecker).to.have.a.property('isFloat64Array');
         });
 
@@ -143,18 +161,18 @@ describe('Type Checker', function() {
     });
 
     describe('isFunction', function(){
-        it('Should have property isFunction', function () {
+        it('Should have property isFunction', function() {
             expect(typeChecker).to.have.a.property('isFunction');
         });
 
-        it('should be true for single function', function(){
+        it('Should be true for single function', function(){
             function test(){}
             expect(typeChecker.isFunction(test)).to.equal(true);
         });
     });
 
     describe('isGenerator', function(){
-        it('Should have property isGenerator', function () {
+        it('Should have property isGenerator', function() {
             expect(typeChecker).to.have.a.property('isGenerator');
         });
     });
@@ -164,52 +182,70 @@ describe('Type Checker', function() {
             expect(typeChecker).to.have.a.property('isGeneratorFunction');
         });
 
-        it('should be true for single Generator function', function(){
+        it('Should be true for single Generator function', function(){
             function* test(){}
             expect(typeChecker.isGeneratorFunction(test)).to.equal(true);
         });
     });
 
+    describe('isInt', function(){
+        it('Should have property isInt', function(){
+            expect(typeChecker).to.have.a.property('isInt');
+        });
+
+        it('Should be true for single int', function(){
+            expect(typeChecker.isInt(2)).to.equal(true);
+        });
+
+        it('Should be true for multiple ints', function(){
+            expect(typeChecker.isInt(2, 3)).to.equal(true);
+        });
+
+        it('Should be false for a float', function(){
+            expect(typeChecker.isInt(2.5)).to.equal(false);
+        });
+    });
+
     describe('isInt8Array', function(){
-        it('Should have property isInt8Array', function () {
+        it('Should have property isInt8Array', function() {
             expect(typeChecker).to.have.a.property('isInt8Array');
         });
 
-        it('should be true for single Int8Array', function(){
+        it('Should be true for single Int8Array', function(){
             expect(typeChecker.isInt8Array(new Int8Array())).to.equal(true);
         });
     });
 
     describe('isInt16Array', function(){
-        it('Should have property isInt16Array', function () {
+        it('Should have property isInt16Array', function() {
             expect(typeChecker).to.have.a.property('isInt16Array');
         });
 
-        it('should be true for single Int16Array', function(){
+        it('Should be true for single Int16Array', function(){
             expect(typeChecker.isInt16Array(new Int16Array())).to.equal(true);
         });
     });
 
     describe('isInt32Array', function(){
-        it('Should have property isInt32Array', function () {
+        it('Should have property isInt32Array', function() {
             expect(typeChecker).to.have.a.property('isInt32Array');
         });
 
-        it('should be true for single Int32Array', function(){
+        it('Should be true for single Int32Array', function(){
             expect(typeChecker.isInt32Array(new Int32Array())).to.equal(true);
         });
 
-        it('should be true for Mutliple Int32Arrays', function(){
+        it('Should be true for Mutliple Int32Arrays', function(){
             expect(typeChecker.isInt32Array(new Int32Array(),new Int32Array())).to.equal(true);
         });
     });
 
     describe('isJSON', function(){
-        it('Should have property isJSON', function () {
+        it('Should have property isJSON', function() {
             expect(typeChecker).to.have.a.property('isJSON');
         });
 
-        it('should be true for single JSON', function(){
+        it('Should be true for single JSON', function(){
             expect(typeChecker.isJSON(JSON)).to.equal(true);
         });
     });
@@ -219,7 +255,7 @@ describe('Type Checker', function() {
             expect(typeChecker).to.have.a.property('isMap');
         });
 
-        it('should be true for single Map', function(){
+        it('Should be true for single Map', function(){
             expect(typeChecker.isMap(new Map())).to.equal(true);
         });
     });
@@ -244,8 +280,22 @@ describe('Type Checker', function() {
         });
     });
 
+    describe('isNully', function(){
+        it('Should have property isNully', function() {
+            expect(typeChecker).to.have.a.property('isNully');
+        });
+
+        it('Should be true for a single null', function(){
+            expect(typeChecker.isNully(null)).to.equal(true);
+        });
+
+        it('Should be true for a single undefined', function(){
+            expect(typeChecker.isNully(undefined)).to.equal(true);
+        });
+    });
+
     describe('isNumber', function(){
-        it('Should have property isNumber', function () {
+        it('Should have property isNumber', function() {
             expect(typeChecker).to.have.a.property('isNumber');
         });
 
@@ -273,21 +323,26 @@ describe('Type Checker', function() {
     });
 
     describe('isPromise', function(){
-        it('Should have property isPromise', function () {
+        it('Should have property isPromise', function() {
             expect(typeChecker).to.have.a.property('isPromise');
         });
 
         it('Should be true for a single promise', function(){
-            expect(typeChecker.isPromise(Promise.resolve())).to.equal(true);
+            const promiseOne = Promise.resolve();
+            expect(typeChecker.isPromise(promiseOne)).to.equal(true);
+            promiseOne.catch(() => {})
         });
 
-        it('Should be true for a Multiple promises', function(){
-            expect(typeChecker.isPromise(Promise.resolve(), Promise.reject())).to.equal(true);
+        it('Should be true for a multiple promises', function(){
+            const promiseOne = Promise.resolve();
+            const promiseTwo = Promise.resolve();
+            expect(typeChecker.isPromise(promiseOne, promiseTwo)).to.equal(true);
+            Promise.all([promiseOne, promiseTwo]).catch(() => {});
         });
     });
 
     describe('isRegExp', function(){
-        it('Should have property isRegExp', function () {
+        it('Should have property isRegExp', function() {
             expect(typeChecker).to.have.a.property('isRegExp');
         });
 
@@ -301,7 +356,7 @@ describe('Type Checker', function() {
     });
 
     describe('isSet', function(){
-        it('Should have property isSet', function () {
+        it('Should have property isSet', function() {
             expect(typeChecker).to.have.a.property('isSet');
         });
 
@@ -311,7 +366,7 @@ describe('Type Checker', function() {
     });
 
     describe('isString', function(){
-        it('Should have property isString', function () {
+        it('Should have property isString', function() {
             expect(typeChecker).to.have.a.property('isString');
         });
 
@@ -381,7 +436,7 @@ describe('Type Checker', function() {
     });
 
     describe('isWeakMap', function(){
-        it('Should have property isWeakMap', function () {
+        it('Should have property isWeakMap', function(){
             expect(typeChecker).to.have.a.property('isWeakMap');
         });
 
@@ -391,11 +446,11 @@ describe('Type Checker', function() {
     });
 
     describe('isWeakSet', function(){
-        it('Should have property isWeakSet', function () {
+        it('Should have property isWeakSet', function(){
             expect(typeChecker).to.have.a.property('isWeakSet');
         });
 
-        it('should be true for single WeakSet', function(){
+        it('Should be true for single WeakSet', function(){
             expect(typeChecker.isWeakSet(new WeakSet())).to.equal(true);
         });
     });
@@ -405,7 +460,7 @@ describe('Type Checker', function() {
           expect(typeChecker).to.have.a.property('getType');
        });
 
-       it('should equal String', function(){
+       it('Should equal String', function(){
           expect(typeChecker.getType('hello')).to.equal('String');
        });
     });
