@@ -1,161 +1,149 @@
 const types = [
-    'Array',
-    'ArrayBuffer',
-    'Arguments',
-    'Boolean',
-    'Date',
-    'Error',
-    'Float32Array',
-    'Float64Array',
-    'Function',
-    'Generator',
-    'GeneratorFunction',
-    'Int8Array',
-    'Int16Array',
-    'Int32Array',
-    'JSON',
-    'Map',
-    'Math',
-    'Null',
-    'Number',
-    'Object',
-    'Promise',
-    'RegExp',
-    'Set',
-    'String',
-    'Symbol',
-    'Uint8Array',
-    'Uint8ClampedArray',
-    'Uint16Array',
-    'Uint32Array',
-    'Undefined',
-    'WeakMap',
-    'WeakSet',
+  'Array',
+  'ArrayBuffer',
+  'Arguments',
+  'Boolean',
+  'Date',
+  'Error',
+  'Float32Array',
+  'Float64Array',
+  'Function',
+  'Generator',
+  'GeneratorFunction',
+  'Int8Array',
+  'Int16Array',
+  'Int32Array',
+  'JSON',
+  'Map',
+  'Math',
+  'Null',
+  'Number',
+  'Object',
+  'Promise',
+  'RegExp',
+  'Set',
+  'String',
+  'Symbol',
+  'Uint8Array',
+  'Uint8ClampedArray',
+  'Uint16Array',
+  'Uint32Array',
+  'Undefined',
+  'WeakMap',
+  'WeakSet',
 ];
 
-const checkType = (type) => {
-    return Object.prototype.toString.call(type).slice(8, -1);
-};
+const checkType = type => Object.prototype.toString.call(type).slice(8, -1);
 
 const methods = {
-    getType(n){
-        return checkType(n);
-    },
-    isEmpty(){
-        if (arguments.length === 0) {
-            return false;
-        }
+  getType(n) {
+    return checkType(n);
+  },
+  isEmpty(...args) {
+    if (arguments.length === 0) {
+      return false;
+    }
 
-        if (arguments.length === 1) {
-            return (this.isNully(arguments[0]) || arguments[0] === '')
-        }
+    if (arguments.length === 1) {
+      return (this.isNully(args[0]) || args[0] === '');
+    }
 
-        const args = Array.prototype.slice.call(arguments);
+    for (let i = 0, len = args.length; i < len; i++) {
+      const current = args[i];
 
-        for(let i = 0, len = args.length; i < len; i++){
-            const current = args[i];
+      if (!this.isNully(current) || current !== '') {
+        return false;
+      }
+    }
 
-            if(!this.isNully(current) || current !== '') {
-                return false;
-            }
-        }
+    return true;
+  },
+  isFloat(...args) {
+    if (args.length === 0) {
+      return false;
+    }
 
-        return true;
-    },
-    isFloat() {
-        if(arguments.length === 0){
-            return false;
-        }
+    if (args.length === 1) {
+      return (this.isNumber(args[0]) && (parseInt(args[0], 10) !== args[0]));
+    }
 
-        if(arguments.length === 1){
-            return (this.isNumber(arguments[0]) && (parseInt(arguments[0]) !== arguments[0]));
-        }
+    for (let i = 0, len = args.length; i < len; i++) {
+      const current = args[i];
 
-        const args = Array.prototype.slice.call(arguments);
+      if (!this.isNumber(current) || (parseInt(current, 10) === current)) {
+        return false;
+      }
+    }
 
-        for(let i = 0, len = args.length; i < len; i++){
-            const current = args[i];
+    return true;
+  },
+  isInt(...args) {
+    if (args.length === 0) {
+      return false;
+    }
 
-            if(!this.isNumber(current) || (parseInt(current) === current)) {
-                return false;
-            }
-        }
+    if (args.length === 1) {
+      return (this.isNumber(args[0]) && (parseInt(args[0], 10) === args[0]));
+    }
 
-        return true;
-    },
-    isInt() {
-        if(arguments.length === 0){
-            return false;
-        }
+    for (let i = 0, len = args.length; i < len; i++) {
+      const current = args[i];
 
-        if(arguments.length === 1){
-            return (this.isNumber(arguments[0]) && (parseInt(arguments[0]) === arguments[0]));
-        }
+      if (!this.isNumber(current) || (parseInt(current, 10) !== current)) {
+        return false;
+      }
+    }
 
-        const args = Array.prototype.slice.call(arguments);
+    return true;
+  },
+  isNully(...args) {
+    if (args.length === 0) {
+      return false;
+    }
 
-        for(let i = 0, len = args.length; i < len; i++){
-            const current = args[i];
+    if (arguments.length === 1) {
+      return (this.isNull(args[0]) || this.isUndefined(args[0]));
+    }
 
-            if(!this.isNumber(current) || (parseInt(current) !== current)) {
-                return false;
-            }
-        }
+    for (let i = 0, len = args.length; i < len; i++) {
+      const current = args[i];
 
-        return true;
-    },
-    isNully(n) {
-        if(arguments.length === 0){
-            return false;
-        }
+      if (!this.isNull(current) || !this.isUndefined(current)) {
+        return false;
+      }
+    }
 
-        if(arguments.length === 1){
-            return (this.isNull(arguments[0]) || this.isUndefined(arguments[0]));
-        }
-
-        const args = Array.prototype.slice.call(arguments);
-
-        for(let i = 0, len = args.length; i < len; i++){
-            const current = args[i];
-
-            if(!this.isNull(current) || !this.isUndefined(current)) {
-                return false;
-            }
-        }
-
-        return true;
-    },
-    isType(n, typeToCompare){
-        return checkType(n).toLowerCase() === typeToCompare.toLowerCase();
-    },
+    return true;
+  },
+  isType(n, typeToCompare){
+    return checkType(n).toLowerCase() === typeToCompare.toLowerCase();
+  },
 };
 
-for(let i = 0, len = types.length; i < len; i++){
-    const type = types[i];
+for (let i = 0, len = types.length; i < len; i++) {
+  const type = types[i];
 
-    methods['is' + type] = (function(currentType){
-        return function(){
-            if(arguments.length === 0){
-                return false;
-            }
+  methods[`is${type}`] = (function (currentType) {
+    return function (...args) {
+      if (args.length === 0) {
+        return false;
+      }
 
-            if(arguments.length === 1){
-                return currentType === checkType(arguments[0]);
-            }
+      if (args.length === 1) {
+        return currentType === checkType(args[0]);
+      }
 
-            const args = Array.prototype.slice.call(arguments);
+      for (let j = 0, innerLen = args.length; j < innerLen; j++) {
+        const current = args[i];
 
-            for(let i = 0, len = args.length; i < len; i++){
-                const current = args[i];
+        if (currentType !== checkType(current)) {
+          return false;
+        }
+      }
 
-                if(currentType !== checkType(current)){
-                    return false;
-                }
-            }
-
-            return true;
-        };
-    }(type));
+      return true;
+    };
+  }(type));
 }
 
 exports = module.exports = methods;
