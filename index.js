@@ -48,7 +48,7 @@ const methods = {
       return (this.isNully(args[0]) || args[0] === '');
     }
 
-    for (let i = 0, len = args.length; i < len; i++) {
+    for (let i = 0, len = args.length; i < len; i += 1) {
       const current = args[i];
 
       if (!this.isNully(current) || current !== '') {
@@ -86,7 +86,7 @@ const methods = {
       return (this.isNumber(args[0]) && (parseInt(args[0], 10) === args[0]));
     }
 
-    for (let i = 0, len = args.length; i < len; i++) {
+    for (let i = 0, len = args.length; i < len; i += 1) {
       const current = args[i];
 
       if (!this.isNumber(current) || (parseInt(current, 10) !== current)) {
@@ -105,7 +105,7 @@ const methods = {
       return (this.isNull(args[0]) || this.isUndefined(args[0]));
     }
 
-    for (let i = 0, len = args.length; i < len; i++) {
+    for (let i = 0, len = args.length; i < len; i += 1) {
       const current = args[i];
 
       if (!this.isNull(current) || !this.isUndefined(current)) {
@@ -120,11 +120,11 @@ const methods = {
   },
 };
 
-for (let i = 0, len = types.length; i < len; i++) {
+for (let i = 0, len = types.length; i < len; i += 1) {
   const type = types[i];
 
-  methods[`is${type}`] = (function (currentType) {
-    return function (...args) {
+  methods[`is${type}`] = (function methodBuilder(currentType) {
+    return function typeCheckerMethod(...args) {
       if (args.length === 0) {
         return false;
       }
@@ -133,7 +133,7 @@ for (let i = 0, len = types.length; i < len; i++) {
         return currentType === checkType(args[0]);
       }
 
-      for (let j = 0, innerLen = args.length; j < innerLen; j++) {
+      for (let j = 0, innerLen = args.length; j < innerLen; j += 1) {
         const current = args[j];
 
         if (currentType !== checkType(current)) {
