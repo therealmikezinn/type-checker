@@ -146,4 +146,4 @@ for (let i = 0, len = types.length; i < len; i += 1) {
   }(type));
 }
 
-exports = module.exports = methods;
+module.exports = methods;

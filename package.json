@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node /dist/type-checker.js",
-    "test": "./node_modules/.bin/mocha $(find . -name '*.spec.js' ! -ipath '*node_modules*')"
+    "test": "./node_modules/.bin/mocha $(find . -name '*.spec.js' ! -ipath '*node_modules*')",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",

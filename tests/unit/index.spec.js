@@ -14,7 +14,7 @@ describe('Type Checker', function() {
             expect(typeChecker.isArray([])).to.equal(true);
         });
 
-        it('Should Return True For Multiple Arrays', function() {
+        it('Should Return True For Multiple Arrays', function(){
             expect(typeChecker.isArray([], [])).to.equal(true);
         });
 
@@ -28,7 +28,7 @@ describe('Type Checker', function() {
     });
 
     describe('isArrayBuffer', function(){
-        it('Should have property isArrayBuffer', function () {
+        it('Should have property isArrayBuffer', function(){
             expect(typeChecker).to.have.a.property('isArrayBuffer');
         });
 
@@ -46,7 +46,7 @@ describe('Type Checker', function() {
     });
 
     describe('isArguments', function(){
-        it('Should have property isArguments', function () {
+        it('Should have property isArguments', function(){
             expect(typeChecker).to.have.a.property('isArguments');
         });
 
@@ -63,7 +63,7 @@ describe('Type Checker', function() {
     });
 
     describe('isBoolean', function(){
-        it('Should have property isBoolean', function () {
+        it('Should have property isBoolean', function(){
             expect(typeChecker).to.have.a.property('isBoolean');
         });
 
@@ -81,7 +81,7 @@ describe('Type Checker', function() {
     });
 
     describe('isDate', function(){
-        it('Should have property isDate', function () {
+        it('Should have property isDate', function(){
             expect(typeChecker).to.have.a.property('isDate');
         });
 
@@ -113,7 +113,7 @@ describe('Type Checker', function() {
     });
 
     describe('isError', function(){
-        it('Should have property isError', function () {
+        it('Should have property isError', function(){
             expect(typeChecker).to.have.a.property('isError');
         });
 
@@ -158,6 +158,10 @@ describe('Type Checker', function() {
         it('Should be true for single Float64Array', function(){
             expect(typeChecker.isFloat64Array(new Float64Array())).to.equal(true);
         });
+
+      it('Should be true for multiple Float64Array', function(){
+        expect(typeChecker.isFloat64Array(new Float64Array(), new Float64Array())).to.equal(true);
+      });
     });
 
     describe('isFunction', function(){
@@ -440,9 +444,15 @@ describe('Type Checker', function() {
             expect(typeChecker).to.have.a.property('isWeakMap');
         });
 
-        it('should be true for single WeakMap', function(){
+        it('Should be true for single WeakMap', function(){
            expect(typeChecker.isWeakMap(new WeakMap())).to.equal(true);
         });
+
+        it('Should be true for multiple WeakMap', function(){
+          expect(typeChecker.isWeakMap(new WeakMap(), new WeakMap())).to.equal(true);
+        });
+
+        it('Should be false for ')
     });
 
     describe('isWeakSet', function(){
@@ -453,6 +463,14 @@ describe('Type Checker', function() {
         it('Should be true for single WeakSet', function(){
             expect(typeChecker.isWeakSet(new WeakSet())).to.equal(true);
         });
+
+        it('Should be true for multiple WeakSet', function(){
+          expect(typeChecker.isWeakSet(new WeakSet(), new WeakSet())).to.equal(true);
+        });
+
+        it('Should be false for no WeakSet Value', function(){
+          expect(typeChecker.isWeakSet(1, new WeakMap())).to.equal(false);
+        });
     });
 
     describe('getType', function(){
@@ -462,6 +480,10 @@ describe('Type Checker', function() {
 
        it('Should equal String', function(){
           expect(typeChecker.getType('hello')).to.equal('String');
+       });
+
+       it('Should equal Object', function(){
+         expect(typeChecker.getType({})).to.equal('Object');
        });
     });
 });
